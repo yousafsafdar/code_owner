@@ -1,0 +1,6 @@
+# In case a later rule does not match, this team will be the default owner of the code.
+# Pull Requests for all such code will have to be reviewed by this team
+*                                                                   @yousafsafdar1
+# Following is the code ownership for teams owning resoruces in the idealo Data Lake
+/datalake-customers/abs.txt                                         @yousafsafdar1
+

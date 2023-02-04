@@ -1,0 +1,59 @@
+name: 'test-plan'
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  terraform-actions:
+    name: Workflow
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+
+#    env:
+#      MC_ID: ${{ secrets.MC_ID }}
+#      MC_TOKEN: ${{ secrets.MC_TOKEN }}
+#      MC_URL: $ {{ secrets.MC_URL }}
+#      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#      AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+#      AWS_REGION: 'eu-central-1'
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@master
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Terraform File Addition
+        id: file-addition
+        run: |
+          pip install requests
+          python main.py
+
+#      - name: Setup Terraform
+#        uses: hashicorp/setup-terraform@v1
+#        with:
+#          terraform_version: 1.0.5
+#
+#      - name: Terraform Fmt
+#        id: fmt
+#        run: terraform fmt -check -diff
+#
+#      - name: Terraform Init
+#        id: init
+#        run: terraform init -backend-config="mc-api-dev-test-110992004963123" -backend-config="key=workflow.json"
+#
+#      - name: Terraform Plan
+#        id: plan
+#        if: github.event_name == 'pull_request'
+#        run: terraform plan -out tf.plan -var="MC_ID=${{ secrets.MC_ID }}" -var="MC_TOKEN=${{ secrets.MC_TOKEN }}" -var="MC_URL=${{ secrets.MC_URL }}" -input=false -no-color
+
